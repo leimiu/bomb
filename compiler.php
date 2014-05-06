@@ -13,6 +13,9 @@ function _is_php_tag($line){
 }
 
 function _is_new_line($line){
+	if(preg_match('/class\s+.*/',trim($line))) return false; //排除class定义
+	if(preg_match('/switch\s+\(.*/',trim($line))) return false; //排除switch关键字
+	if(preg_match('/(private|public|var)\s+\$.*/',trim($line))) return false; //排除类变量定义
 	return _is_end_with(trim($line),';') or _is_end_with(trim($line),'{');
 }
 
